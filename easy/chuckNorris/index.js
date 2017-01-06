@@ -1,10 +1,12 @@
+// https://www.codingame.com/ide/puzzle/chuck-norris
+
 /**
  * Auto-generated code below aims at helping you parse
  * the standard input according to the problem statement.
  **/
 
-// var MESSAGE = readline();
-var MESSAGE = 'C';
+var MESSAGE = readline();
+// var MESSAGE = '%';
 
 // Write an action using print()
 // To debug: printErr('Debug messages...');
@@ -12,13 +14,19 @@ var binaryMessage = [];
 var encodedMessage = '';
 
 MESSAGE.split('').forEach(function(i) {
-    i.charCodeAt().toString(2).split('').forEach(function(j) {
+    var encodedChar = i.charCodeAt().toString(2).split('');
+    if (encodedChar.length < 7) {
+        zeroes = 7 - encodedChar.length;
+        for (let i = 0; i < zeroes; i++) {
+            encodedChar.unshift('0');
+        }
+    }
+    encodedChar.forEach(function(j) {
         binaryMessage.push(j);
     });
 });
 
 for (let i = 0; i < binaryMessage.length; i++) {
-    // set first encoded digit
     if (i === 0) {
         if (binaryMessage[i] === '1') {
             encodedMessage += '0 0';
@@ -39,6 +47,6 @@ for (let i = 0; i < binaryMessage.length; i++) {
     }
 }
 
-console.log(binaryMessage);
-console.log(encodedMessage);
+// console.log(binaryMessage);
+print(encodedMessage);
 // print(BINARYMESSAGE);
